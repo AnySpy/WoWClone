@@ -5,8 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     // TODO:
-    // * Make the instantiated objects obey the laws of physics
-    // * Make them spawn randomly through the box and with a random rotations
+    // * Handle bumpy terrain (Not a priority currently)
 
     [SerializeField] private float timer;
     [SerializeField] private GameObject spawnee;
@@ -19,30 +18,19 @@ public class Spawner : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
-
+        
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer > 4 && currObjects >= 3)
+        if (timer > 4)
         {
             ran = Random.Range(0, 5000);
-            if(ran > 4000)
+            if (currObjects >= 3 && ran > 4000 || currObjects < 3 && ran > 2000)
             {
-                Instantiate(spawnee, gameObject.transform.position, Quaternion.identity);
-                timer = 0;
+                Instantiate(spawnee, randomLocation(), Quaternion.identity);
             }
-            else timer = 0;
-        }
-        else if (timer > 4 && currObjects < 3)
-        {
-            ran = Random.Range(0, 5000);
-            if (ran > 2000)
-            {
-                Instantiate(spawnee, gameObject.transform.position, Quaternion.identity);
-                timer = 0;
-            }
-            else timer = 0;
+            timer = 0;
         }
     }
 
@@ -54,5 +42,12 @@ public class Spawner : MonoBehaviour
     private void CubeCast()
     {
         currObjects = Physics.OverlapBoxNonAlloc(gameObject.transform.position, transform.localScale / 2, collisions, Quaternion.identity, 1);
+    }
+
+    private Vector3 randomLocation()
+    {
+        float randomX = Random.Range(-gameObject.transform.localScale.x / 2, gameObject.transform.localScale.x / 2);
+        float randomZ = Random.Range(-gameObject.transform.localScale.z / 2, gameObject.transform.localScale.z / 2);
+        return new Vector3(randomX, -transform.position.y, randomZ) + transform.position;
     }
 }
