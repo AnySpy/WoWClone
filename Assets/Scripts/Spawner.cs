@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -28,7 +29,8 @@ public class Spawner : MonoBehaviour
             ran = Random.Range(0, 5000);
             if (currObjects >= 3 && ran > 4000 || currObjects < 3 && ran > 2000)
             {
-                Instantiate(spawnee, randomLocation(), Quaternion.identity);
+                Object obj = Instantiate(spawnee, RandomLocation(), RandomRotation());
+                obj.GetComponent<BasicAI>().spawner = gameObject;
             }
             timer = 0;
         }
@@ -44,10 +46,15 @@ public class Spawner : MonoBehaviour
         currObjects = Physics.OverlapBoxNonAlloc(gameObject.transform.position, transform.localScale / 2, collisions, Quaternion.identity, 1);
     }
 
-    private Vector3 randomLocation()
+    private Vector3 RandomLocation()
     {
         float randomX = Random.Range(-gameObject.transform.localScale.x / 2, gameObject.transform.localScale.x / 2);
         float randomZ = Random.Range(-gameObject.transform.localScale.z / 2, gameObject.transform.localScale.z / 2);
         return new Vector3(randomX, -transform.position.y, randomZ) + transform.position;
+    }
+
+    private Quaternion RandomRotation()
+    {
+        return Quaternion.Euler(0, Random.Range(0f, 360f), 0);
     }
 }
