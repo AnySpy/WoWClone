@@ -125,20 +125,18 @@ static class CreatureQueue
 
 public class TabTarg : MonoBehaviour
 {
-    #region Targeting Settings
+    #region Global Variables
     [Header("Targeting Settings")]
-    [SerializeField] private Creature       target;                                 // * The currently selected target
-    [SerializeField] private float          softAggro;                              // * The softAggro radius
-    [SerializeField] private float          hardAggro;                              // * The hard aggro radius
-    #endregion
+    [SerializeField] private Creature       target;                                     // * The currently selected target
+    [SerializeField] private float          softAggro;                                  // * The softAggro radius
+    [SerializeField] private float          hardAggro;                                  // * The hard aggro radius
     
-    #region Private Fields
     [Header("Internal Data")]
-    private RaycastHit[] rayHits            = new RaycastHit[50];                   // * An array of data about colliders our rays have connected with.
-    private Collider[]   softHits           = new Collider[50];                     // * An array of colliders in our softAggro radius.
-    private Collider[]   hardHits           = new Collider[10];                     // * An array of colliders in our hardAggro radius.
-    private bool         targeting          = false;                                // * A flag to represent whether we are currently targeting something.
-    private int          hardCollisions;                                            // * A count of the number of collisions in out hardAggro radius
+    private RaycastHit[]                    rayHits            = new RaycastHit[50];    // * An array of data about colliders our rays have connected with.
+    private Collider[]                      softHits           = new Collider[50];      // * An array of colliders in our softAggro radius.
+    private Collider[]                      hardHits           = new Collider[10];      // * An array of colliders in our hardAggro radius.
+    private bool                            targeting          = false;                 // * A flag to represent whether we are currently targeting something.
+    private int                             hardCollisions;                             // * A count of the number of collisions in out hardAggro radius
     #endregion
 
     #region Default Unity Methods

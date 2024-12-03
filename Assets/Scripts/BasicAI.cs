@@ -10,24 +10,24 @@ using Random = UnityEngine.Random;
 
 public class BasicAI : MonoBehaviour
 {
+    // TODO:
+    // ! Fix them falling over and flying everywhere lmfao
+    // * Make movement a fluid rotation around the y-axis.
+
+    #region Global Variables
     [SerializeField] private GameObject creature;
     [SerializeField] public GameObject spawner;
-
     [SerializeField] private float timer = 0;
     [SerializeField] private int rotation = 0;
     [SerializeField] private float movement = 0;
     [SerializeField] private float xLeash = 0;
     [SerializeField] private float zLeash = 0;
-
     [SerializeField] private int movementSpeed;
-
     private bool isMoving = false;
     private bool rotated = false;
+    #endregion
 
-    // TODO:
-    // ! Fix them falling over and flying everywhere lmfao
-    // * Make movement rotate around the y-axis before rotating.
-
+    #region Default Unity Methods
     void Start()
     {
         creature = gameObject;
@@ -48,7 +48,9 @@ public class BasicAI : MonoBehaviour
             Movement();
         }
     }
+    #endregion
 
+    #region Helper Methods
     /// <summary>
     /// Rotates an object and then "steps" them forward each frame.
     /// </summary>
@@ -81,4 +83,5 @@ public class BasicAI : MonoBehaviour
             timer = 0;
         }
     }
+    #endregion
 }
