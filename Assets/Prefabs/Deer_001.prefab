@@ -1041,9 +1041,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 0}
+  spawner: {fileID: 0}
   timer: 0
   rotation: 0
   movement: 0
+  xLeash: 0
+  zLeash: 0
   movementSpeed: 10
 --- !u!65 &6413090475677901780
 BoxCollider:
