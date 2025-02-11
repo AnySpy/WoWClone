@@ -1,3 +1,5 @@
+This program is currently on hiatus while I'm studying.
+
 # AnySpy | WoW Clone
 
 This is an attempt to develop a WoW Classic singleplayer game.
